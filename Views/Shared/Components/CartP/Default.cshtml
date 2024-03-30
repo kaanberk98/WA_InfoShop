@@ -1,0 +1,7 @@
+﻿@using WA_InfoShop.Models;
+@model List<ProductProperty>
+
+@foreach(var item in Model)
+{
+    <li><i class="ion-ios-arrow-right"></i> @item.Property.Name : <span>@item.Name</span></li>
+}

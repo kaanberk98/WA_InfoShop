@@ -1,0 +1,8 @@
+﻿@model List<ProductProperty>
+
+    <ul class="widget_dropdown_categories collapse show" id="color">
+        @foreach (var item in Model)
+        {
+        <li><a href="#"> @item.Name </a></li>
+        }
+    </ul>

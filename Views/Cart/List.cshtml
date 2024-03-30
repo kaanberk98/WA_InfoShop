@@ -1,0 +1,137 @@
+﻿@using WA_InfoShop.Models
+@model List<Cart>
+
+@{
+
+}
+
+
+<div class="breadcrumbs_area breadcrumbs_other">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content text-center">
+                    <h3 class="">Shopping Cart</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shopping_cart_area">
+    <div class="container">
+        <form action="#">
+            <div class="cart_page_inner mb-60">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cart_page_tabel">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>products</th>
+                                        <th>information</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        double toplam = Convert.ToInt32(item.Quantity * item.Product.Price);
+                                        double toplamkdv = toplam + (toplam * 0.20);
+                                        <tr class="border-top">
+                                            <td>
+                                                <div class="cart_product_thumb">
+                                                    <img src="~/assets/img/product/product4.jpg" alt="">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_text">
+                                                    <h4>@item.Product?.Name</h4>
+                                                    <ul>
+                                                        @await Component.InvokeAsync("CartP", new { id = item.ProductId})
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_price">
+                                                    <span>$@item.Product?.Price</span>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div  class="">
+                                                     <a style="margin-left:10px" href="/Cart/QuantityRemove/@item.Id"><i class="fa-solid fa-minus"></i></a> 
+                                                    <span style="margin-left:15px"> @item.Quantity</span>
+                                                     <a style="margin-left:15px" href="/Cart/QuantityAdd/@item.Id"><i class="fa-solid fa-plus"></i></a> 
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_price">
+                                                    <span>$@toplam </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="cart_product_remove text-right">
+                                                    <a href="/Cart/Delete/@item.Id"><i class="ion-android-close"></i></a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                       
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart_page_button border-top d-flex justify-content-between">
+                            <div class="shopping_cart_btn">
+                                <a href="#" class="btn btn-primary border">CLEAR SHOPPING CART</a>
+                                <button class="btn btn-primary border" type="submit">UPDATE YOUR CART</button>
+                            </div>
+                            <div class="shopping_continue_btn">
+                                <button class="btn btn-primary" type="submit">CONTINUE SHOPPING</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area start-->
+                <div class="cart_page_bottom">
+                <div class="row justify-content-between">
+                    <div class="col-6" style="height: 200px">
+                        <div class="shopping_coupon_calculate">
+                            <h3 class="border-bottom">Coupon Discount   </h3>
+                            <p>Enter your coupon code if you have one.</p>
+                            <input class="border" placeholder="Enter your code" type="text">
+                            <button class="btn btn-primary" type="submit">apply coupon</button>
+                        </div>
+                    </div>
+                    <div class="col-6" style="height: 200px">
+                        <div class="grand_totall_area">
+                            <div class="grand_totall_inner border-bottom">
+                                <div class="cart_subtotal d-flex justify-content-between">
+                                    <p>Total </p>
+                                    <span>$</span>
+                                </div>
+                                <div class="cart_subtotal d-flex justify-content-between">
+                                    <p>Tax </p>
+                                    <span>%20</span>
+                                </div>
+                                <div class="cart_grandtotal d-flex justify-content-between">
+                                    <p>Grand Total</p>
+                                    <span>$</span>
+                                </div>
+                            </div>
+                            <div class="proceed_checkout_btn">
+                                <a class="btn btn-primary" href="#">Proceed to Checkout</a>
+                            </div>
+                            <a href="#">Checkout with Mutilple Adresses</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--coupon code area end-->
+        </form>
+    </div>
+</div>

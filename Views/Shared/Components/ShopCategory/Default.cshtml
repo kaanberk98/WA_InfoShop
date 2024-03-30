@@ -1,0 +1,11 @@
+﻿@model List<Category>
+
+@foreach (var item in Model)
+{
+    <li class="widget_sub_categories">
+        <a href="javascript:void(0)" data-toggle="collapse" data-target="#men">@item.Name</a>
+        <ul class="widget_dropdown_categories collapse show" id="men">
+            <li><a href="#"> Alt Kategoriler </a></li>
+        </ul>
+    </li>
+}
